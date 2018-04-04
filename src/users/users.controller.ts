@@ -1,5 +1,4 @@
 import { Controller, Get, Req } from '@nestjs/common';
-import { Observable } from 'rxjs/Observable';
 import { UsersService } from './users.service';
 import { User } from 'interfaces/user.interface';
 
