@@ -1,5 +1,5 @@
 export class DepartmentDto {
   constructor(
-    name: string,
+    public name: string,
   ) {}
 }

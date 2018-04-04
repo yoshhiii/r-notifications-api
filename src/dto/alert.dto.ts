@@ -1,9 +1,9 @@
 export class AlertDto {
   constructor(
-    title: string,
-    author: string,
-    body: string,
-    recipients: Array<string>,
-    createdDate: Date,
+    public title: string,
+    public author: string,
+    public body: string,
+    public recipients: Array<string>,
+    public createdDate: Date,
   ) {}
 }

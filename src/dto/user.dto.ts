@@ -1,9 +1,8 @@
 export class UserDto {
   constructor(
     public name: string,
-    email: number,
-    password: string,
-    departments: Array<string>,
-    notificationPref: string,
+    public email: string,
+    public departments: Array<string>,
+    public notificationPref: string,
   ) {}
 }
