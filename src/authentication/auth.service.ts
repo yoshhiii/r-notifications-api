@@ -1,10 +1,10 @@
 import * as jwt from 'jsonwebtoken';
 import { Component, Inject } from '@nestjs/common';
-import { UsersService } from 'users/users.service';
+import { UsersService } from '../users/users.service';
 
 @Component()
 export class AuthService {
-  constructor(@Inject('UsersService') private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService) { }
 
   async createToken(headers) {
     const expiresIn = 60 * 60, secretOrKey = 'secret';
