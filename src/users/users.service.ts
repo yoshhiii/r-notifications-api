@@ -1,7 +1,8 @@
 import { Model } from 'mongoose';
-import { Component, Inject } from '@nestjs/common';
+import { Component, Inject, Param, HttpStatus } from '@nestjs/common';
 import { User } from '../interfaces/user.interface';
 import { UserDto } from '../dto/user.dto';
+import { HttpException } from '@nestjs/core';
 
 @Component()
 export class UsersService {
@@ -10,10 +11,33 @@ export class UsersService {
 
   async create(userDto: UserDto): Promise<User> {
     const createdUser = new this.userModel(userDto);
-    return await createdUser.save();
+    let duplicate: boolean = false;
+
+    if (createdUser == null || createdUser.name == null || createdUser.name.length === 0
+        || createdUser.email == null || createdUser.email.length === 0) {
+      throw new HttpException('Invalid user model', HttpStatus.BAD_REQUEST);
+    }
+
+    await this.findByEmail(createdUser.email).then(foundUser => {
+      if (foundUser !== null) {
+        duplicate = foundUser.email === createdUser.email;
+      }
+    });
+
+    if (!duplicate) {
+      return await createdUser.save();
+    } else {
+      throw new HttpException('Duplicate user', HttpStatus.BAD_REQUEST);
+    }
   }
 
   async findAll(): Promise<User[]> {
     return await this.userModel.find().exec();
+  }
+
+  async findByEmail(email: string): Promise<User> {
+    return await this.userModel.findOne()
+      .where('email').equals(email)
+      .exec();
   }
 }
