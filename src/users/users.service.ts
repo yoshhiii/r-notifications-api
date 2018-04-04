@@ -16,4 +16,10 @@ export class UsersService {
   async findAll(): Promise<User[]> {
     return await this.userModel.find().exec();
   }
+
+  async findByEmail(email): Promise<User> {
+    return await this.userModel.findOne()
+      .where('email').equals(email)
+      .exec();
+  }
 }

@@ -7,11 +7,12 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
-// import { AuthController } from './auth.controller';
+import { AuthController } from './auth.controller';
+// import { UsersService } from '../users/users.service';
 
 @Module({
   components: [AuthService, JwtStrategy],
-  // controllers: [AuthController],
+  controllers: [AuthController],
 })
 export class AuthModule implements NestModule {
   public configure(consumer: MiddlewaresConsumer) {
