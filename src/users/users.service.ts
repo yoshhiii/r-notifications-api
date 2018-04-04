@@ -31,6 +31,22 @@ export class UsersService {
     }
   }
 
+  async update(userDto: UserDto) {
+    if (userDto == null || userDto.name == null || userDto.name.length === 0
+      || userDto.email == null || userDto.email.length === 0) {
+      throw new HttpException('Invalid user model', HttpStatus.BAD_REQUEST);
+    }
+
+    let foundUser: User;
+    await this.findByEmail(userDto.email).then(user => foundUser = user);
+
+    if (foundUser == null) {
+      throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
+    } else {
+      await this.userModel.findOneAndUpdate({ email: foundUser.email}, userDto).exec();
+    }
+  }
+
   async findAll(): Promise<User[]> {
     return await this.userModel.find().exec();
   }
