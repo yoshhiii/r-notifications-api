@@ -26,6 +26,7 @@
     "mongoose": "^5.0.12",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^5.5.6",
+    "slack-node": "^0.1.8",
     "typescript": "^2.6.2"
   },
   "devDependencies": {
