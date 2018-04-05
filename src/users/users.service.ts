@@ -60,6 +60,7 @@ export class UsersService {
   }
 
   async findByEmail(email: string): Promise<User> {
+    console.log(email);
     return await this.userModel.findOne()
       .where('email').equals(email)
       .exec();

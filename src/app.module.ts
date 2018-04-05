@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { AlertsModule } from './alerts/alerts.module';
 import { DepartmentsModule } from './departments/departments.module';
 import { AuthMiddleware } from './authentication/auth.middleware';
+import { CoorsMiddleware } from './coors.middleware';
 
 @Module({
   imports: [
@@ -16,6 +17,9 @@ import { AuthMiddleware } from './authentication/auth.middleware';
 })
 export class AppModule {
   public configure(consumer: MiddlewaresConsumer): void {
+    consumer.apply(CoorsMiddleware).forRoutes(
+      { path: '/*', method: RequestMethod.ALL },
+    );
     consumer.apply(AuthMiddleware).forRoutes(
       { path: '/*', method: RequestMethod.ALL },
     );
