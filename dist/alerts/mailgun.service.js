@@ -22,47 +22,32 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const common_1 = require("@nestjs/common");
-const mailgun_service_1 = require("./mailgun.service");
-const slack_service_1 = require("./slack.service");
-let AlertsService = class AlertsService {
-    constructor(alertModel, mailgunService, slackService) {
+const api_key = 'key-1e4f7f1347ddd9e131e1ebdc85b414e3';
+const domain = 'sandbox2ff6710e28b743f28e15a06994291264.mailgun.org';
+const mailgun = require('mailgun-js')({ apiKey: api_key, domain });
+let MailgunService = class MailgunService {
+    constructor(alertModel) {
         this.alertModel = alertModel;
-        this.mailgunService = mailgunService;
-        this.slackService = slackService;
-    }
-    create(alertDto) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (alertDto == null || alertDto.author == null || alertDto.author.length === 0) {
-                throw new common_1.HttpException('Invalid alert model', common_1.HttpStatus.BAD_REQUEST);
-            }
-            alertDto.createdDate = new Date();
-            const createdAlert = new this.alertModel(alertDto);
-            return yield createdAlert.save();
-        });
-    }
-    findAll() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield this.alertModel.find().exec();
-        });
     }
     send(alertDto) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (alertDto.type === 'email') {
-                this.mailgunService.send(alertDto);
-            }
-            if (alertDto.type === 'slack') {
-                this.slackService.send(alertDto);
-            }
-            return true;
+            const data = {
+                from: 'cwalsh2189@gmail.com',
+                to: 'cwalsh@relias.com',
+                subject: 'Hello',
+                test: 'test message',
+            };
+            mailgun.messages().send(data, (error, body) => __awaiter(this, void 0, void 0, function* () {
+                return yield true;
+            }));
+            return yield false;
         });
     }
 };
-AlertsService = __decorate([
+MailgunService = __decorate([
     common_1.Component(),
     __param(0, common_1.Inject('AlertModelToken')),
-    __metadata("design:paramtypes", [mongoose_1.Model,
-        mailgun_service_1.MailgunService,
-        slack_service_1.SlackService])
-], AlertsService);
-exports.AlertsService = AlertsService;
-//# sourceMappingURL=alerts.service.js.map
+    __metadata("design:paramtypes", [mongoose_1.Model])
+], MailgunService);
+exports.MailgunService = MailgunService;
+//# sourceMappingURL=mailgun.service.js.map

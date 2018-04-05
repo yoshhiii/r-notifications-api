@@ -8,15 +8,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const alerts_service_1 = require("./alerts.service");
+const alert_dto_1 = require("dto/alert.dto");
 let AlertsController = class AlertsController {
     constructor(alertsService) {
         this.alertsService = alertsService;
     }
     findAll() {
         return this.alertsService.findAll();
+    }
+    create(alertDto) {
+        return this.alertsService.create(alertDto);
+    }
+    send(req, res) {
+        console.log(req);
+        return this.alertsService.send(req);
     }
 };
 __decorate([
@@ -25,6 +36,20 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], AlertsController.prototype, "findAll", null);
+__decorate([
+    common_1.Post(),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [alert_dto_1.AlertDto]),
+    __metadata("design:returntype", Promise)
+], AlertsController.prototype, "create", null);
+__decorate([
+    common_1.Post(),
+    __param(0, common_1.Req()), __param(1, common_1.Res()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], AlertsController.prototype, "send", null);
 AlertsController = __decorate([
     common_1.Controller('alerts'),
     __metadata("design:paramtypes", [alerts_service_1.AlertsService])

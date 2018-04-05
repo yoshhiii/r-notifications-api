@@ -1,12 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class AlertDto {
-    constructor(title, author, body, recipients, createdDate) {
+    constructor(title, author, body, recipients, createdDate, type) {
         this.title = title;
         this.author = author;
         this.body = body;
         this.recipients = recipients;
         this.createdDate = createdDate;
+        this.type = type;
     }
 }
 exports.AlertDto = AlertDto;

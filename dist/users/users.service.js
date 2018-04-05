@@ -77,7 +77,6 @@ let UsersService = class UsersService {
     }
     findByEmail(email) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(email);
             return yield this.userModel.findOne()
                 .where('email').equals(email)
                 .exec();

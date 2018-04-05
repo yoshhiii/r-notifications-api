@@ -4,6 +4,7 @@ import { AlertsService } from './alerts.service';
 import { AlertsProviders } from '../database/alerts.providers';
 import { DatabaseModule } from '../database/database.module';
 import { MailgunService } from './mailgun.service';
+import { SlackService } from 'alerts/slack.service';
 
 @Module({
   imports: [DatabaseModule],
@@ -11,6 +12,7 @@ import { MailgunService } from './mailgun.service';
   components: [
     AlertsService,
     MailgunService,
+    SlackService,
     ...AlertsProviders,
   ],
 })

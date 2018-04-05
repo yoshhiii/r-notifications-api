@@ -11,6 +11,7 @@ const alerts_controller_1 = require("./alerts.controller");
 const alerts_service_1 = require("./alerts.service");
 const alerts_providers_1 = require("../database/alerts.providers");
 const database_module_1 = require("../database/database.module");
+const mailgun_service_1 = require("./mailgun.service");
 let AlertsModule = class AlertsModule {
 };
 AlertsModule = __decorate([
@@ -19,6 +20,7 @@ AlertsModule = __decorate([
         controllers: [alerts_controller_1.AlertsController],
         components: [
             alerts_service_1.AlertsService,
+            mailgun_service_1.MailgunService,
             ...alerts_providers_1.AlertsProviders,
         ],
     })
