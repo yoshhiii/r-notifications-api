@@ -2,13 +2,10 @@ import { Model } from 'mongoose';
 import { Component, Inject } from '@nestjs/common';
 import { Alert } from '../interfaces/alert.interface';
 import { AlertDto } from '../dto/alert.dto';
-const api_key = 'key-1e4f7f1347ddd9e131e1ebdc85b414e3';
-const domain = 'sandbox2ff6710e28b743f28e15a06994291264.mailgun.org';
-// tslint:disable-next-line:no-var-requires
-const mailgun = require('mailgun-js')({apiKey: api_key, domain});
+import * as firebase from 'firebase';
 
 @Component()
-export class MailgunService {
+export class FirebaseService {
   constructor(
     @Inject('AlertModelToken') private readonly alertModel: Model<Alert>) {}
 
@@ -19,10 +16,11 @@ export class MailgunService {
       subject: alertDto.title,
       text: alertDto.body,
     };
+    // firebase.messaging().
 
-    mailgun.messages().send(data, async (error, body) => {
-      return await body;
-    });
+    // mailgun.messages().send(data, async (error, body) => {
+    //   return await body;
+    // });
 
     return await null;
   }
