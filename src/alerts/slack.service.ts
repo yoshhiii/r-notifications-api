@@ -17,7 +17,8 @@ export class SlackService {
         return await this.slack.webhook({
             channel: '#ranchdressing2',
             username: 'relias-notifications',
-            text: 'This is a test message sent by the Relias-Notifications webhook bot',
+text: 'Subject: ' + alertDto.title + `
+Message: ` + alertDto.body,
         }, (err, response) => {
 
         });
