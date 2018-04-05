@@ -74,7 +74,7 @@ export class UsersService {
 
   async findByDepartment(dept: DepartmentDto[]): Promise<User[]> {
     return await this.userModel.find()
-      .where('departments').equals(dept[0].name)
+      .where('departments').equals(dept[0])
       .exec();
   }
 }
