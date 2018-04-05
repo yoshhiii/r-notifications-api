@@ -1,1 +1,0 @@
-{"version":3,"file":"alert.schema.js","sourceRoot":"","sources":["../../../src/database/schemas/alert.schema.ts"],"names":[],"mappings":";;AAAA,qCAAqC;AAExB,QAAA,WAAW,GAAG,IAAI,QAAQ,CAAC,MAAM,CAAC;IAC7C,KAAK,EAAE,MAAM;IACb,MAAM,EAAE,MAAM;IACd,IAAI,EAAE,MAAM;IACZ,UAAU,EAAE,CAAC,MAAM,CAAC;IACpB,WAAW,EAAE,IAAI;CAClB,CAAC,CAAC"}

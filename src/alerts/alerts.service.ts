@@ -38,7 +38,7 @@ export class AlertsService {
       users.forEach(user => {
         if (user.notificationPref === 'Email') {
           this.mailgunService.send(alertDto, user.email);
-        } else if (alertDto.type === 'slack') {
+        } else if (user.notificationPref === 'slack') {
           this.slackService.send(alertDto);
         }
       });

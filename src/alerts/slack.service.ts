@@ -14,6 +14,7 @@ export class SlackService {
     }
 
     async send(alertDto: AlertDto): Promise<any> {
+        console.log(alertDto);
         return await this.slack.webhook({
             channel: '#ranchdressing2',
             username: 'relias-notifications',
