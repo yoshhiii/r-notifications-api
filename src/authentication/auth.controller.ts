@@ -12,7 +12,8 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly userService: UsersService,
-  ) { }
+  ) {}
+
   @Post('register')
   public async register(@Req() req, @Res() res) {
     const hashedPassword = bcrypt.hashSync(req.body.password, 8);
@@ -78,16 +79,8 @@ export class AuthController {
     });
   }
 
-  // @Post('token')
-  // @HttpCode(HttpStatus.OK)
-  // public async getToken(@Headers() headers) {
-  //   return await this.authService.createToken(headers);
-  // }
-
-  // @Get('authorized')
-  // public async authorized() {
-  //   // tslint:disable-next-line:no-console
-  //   console.log('Authorized route...');
-  //   return await this.authService.validateUser(true);
-  // }
+  @Get('logout')
+  public async logout(@Req() req, @Res() res) {
+    res.status(200).send({ auth: false, token: null });
+  }
 }
