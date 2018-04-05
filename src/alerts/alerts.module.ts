@@ -3,12 +3,14 @@ import { AlertsController } from './alerts.controller';
 import { AlertsService } from './alerts.service';
 import { AlertsProviders } from '../database/alerts.providers';
 import { DatabaseModule } from '../database/database.module';
+import { MailgunService } from './mailgun.service';
 
 @Module({
   imports: [DatabaseModule],
   controllers: [AlertsController],
   components: [
     AlertsService,
+    MailgunService,
     ...AlertsProviders,
   ],
 })
