@@ -26,14 +26,14 @@ export class AlertsService {
     return await this.alertModel.find().exec();
   }
 
-  async send(alertDto: AlertDto): Promise<boolean> {
+  async send(alertDto: AlertDto): Promise<any> {
     if (alertDto.type === 'email') {
-      this.mailgunService.send(alertDto);
+      return this.mailgunService.send(alertDto);
     }
     if (alertDto.type === 'slack') {
       this.slackService.send(alertDto);
     }
 
-    return true;
+    return null;
   }
 }

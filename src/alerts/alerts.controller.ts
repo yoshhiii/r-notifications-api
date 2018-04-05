@@ -20,7 +20,7 @@ export class AlertsController {
   }
 
   @Post('send')
-  send(@Req() req, @Res() res): Promise<any> {
-    return this.alertsService.send(req);
+  send(@Body() alertDto: AlertDto): Promise<any> {
+    return this.alertsService.send(alertDto);
   }
 }

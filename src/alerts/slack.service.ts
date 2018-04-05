@@ -13,16 +13,13 @@ export class SlackService {
         this.slack.setWebhook(this.webhookUri);
     }
 
-    async send(alertDto: AlertDto): Promise<boolean> {
-        console.log('what');
-        return this.slack.webhook({
+    async send(alertDto: AlertDto): Promise<any> {
+        return await this.slack.webhook({
             channel: '#ranchdressing2',
             username: 'relias-notifications',
             text: 'This is a test message sent by the Relias-Notifications webhook bot',
         }, (err, response) => {
-            if (response) return response;
-            if (err) return err;
-        });
 
+        });
     }
 }
