@@ -64,4 +64,10 @@ export class UsersService {
       .where('email').equals(email)
       .exec();
   }
+
+  async findById(id: string): Promise<User> {
+    return await this.userModel.findOne()
+      .where('_id').equals(id)
+      .exec();
+  }
 }
