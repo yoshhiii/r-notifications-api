@@ -67,7 +67,7 @@ export class AuthController {
           const jwtoken = jwt.sign({ id: user._id }, config.secret, {
             expiresIn: 86400,
           });
-          return res.status(200).send({ auth: true, token: jwtoken });
+          return res.status(200).send({ auth: true, token: jwtoken, user });
         } else {
           return res.status(401).send({ auth: false, token: null });
         }
