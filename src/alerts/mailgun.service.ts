@@ -11,19 +11,19 @@ export class MailgunService {
   constructor(
     @Inject('AlertModelToken') private readonly alertModel: Model<Alert>) {}
 
-  async send(alertDto: AlertDto): Promise<boolean> {
+  async send(alertDto: AlertDto): Promise<any> {
     const data = {
-      from: 'cwalsh2189@gmail.com',
+      from: 'test@test.com',
       to: 'cwalsh@relias.com',
       subject: 'Hello',
-      test: 'test message',
+      text: 'test message',
     };
 
     mailgun.messages().send(data, async (error, body) => {
-      return await true;
+      return await body;
     });
 
-    return await false;
+    return await null;
   }
 
 }

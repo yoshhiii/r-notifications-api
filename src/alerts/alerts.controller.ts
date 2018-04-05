@@ -19,9 +19,8 @@ export class AlertsController {
     return this.alertsService.create(alertDto);
   }
 
-  @Post()
-  send(@Req() req, @Res() res): Promise<any> {
-    console.log(req);
-    return this.alertsService.send(req);
+  @Post('send')
+  send(@Body() alertDto: AlertDto): Promise<any> {
+    return this.alertsService.send(alertDto);
   }
 }
