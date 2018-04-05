@@ -23,7 +23,6 @@ export class AuthController {
       password: hashedPassword,
       departments: req.body.departments,
       notificationPref: req.body.notificationPref,
-      slackUser: null,
     }).then(user => {
         // Create a token
         const jwtoken = jwt.sign({ id: user._id }, config.secret, {
