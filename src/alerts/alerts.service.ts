@@ -34,6 +34,9 @@ export class AlertsService {
   async send(alertDto: AlertDto): Promise<any> {
 
     const departments: Array<DepartmentDto> = alertDto.recipients;
+
+    this.create(alertDto);
+
     this.userService.findByDepartment(departments).then(users => {
       users.forEach(user => {
         if (user.notificationPref === 'Email') {
