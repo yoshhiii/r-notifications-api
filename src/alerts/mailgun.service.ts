@@ -11,10 +11,11 @@ export class MailgunService {
   constructor(
     @Inject('AlertModelToken') private readonly alertModel: Model<Alert>) {}
 
-  async send(alertDto: AlertDto): Promise<any> {
+  async send(alertDto: AlertDto, email: string): Promise<any> {
+    console.log(alertDto);
     const data = {
-      from: 'test@test.com',
-      to: 'cwalsh@relias.com',
+      from: alertDto.author,
+      to: email,
       subject: alertDto.title,
       text: alertDto.body,
     };

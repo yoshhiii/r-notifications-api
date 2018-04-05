@@ -23,6 +23,7 @@ export class AuthController {
       password: hashedPassword,
       departments: req.body.departments,
       notificationPref: req.body.notificationPref,
+      slackUser: null,
     }).then(user => {
         // Create a token
         const jwtoken = jwt.sign({ id: user._id }, config.secret, {
@@ -36,7 +37,7 @@ export class AuthController {
 
   @Get('me')
   public async getMe(@Req() req, @Res() res) {
-    const token = req.headers['x-access-token'];
+    const token = req.headers.Authorization;
     if (!token) {
       return res.status(401).send({ auth: false, message: 'No token provided'});
     }

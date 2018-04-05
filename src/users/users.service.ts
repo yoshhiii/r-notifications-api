@@ -3,6 +3,7 @@ import { Component, Inject, Query, HttpStatus } from '@nestjs/common';
 import { User } from '../interfaces/user.interface';
 import { UserDto } from '../dto/user.dto';
 import { HttpException } from '@nestjs/core';
+import { DepartmentDto } from 'dto/department.dto';
 
 @Component()
 export class UsersService {
@@ -68,6 +69,12 @@ export class UsersService {
   async findById(id: string): Promise<User> {
     return await this.userModel.findOne()
       .where('_id').equals(id)
+      .exec();
+  }
+
+  async findByDepartment(dept: DepartmentDto[]): Promise<User[]> {
+    return await this.userModel.find()
+      .where('departments').equals(dept[0].name)
       .exec();
   }
 }

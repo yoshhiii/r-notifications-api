@@ -9,8 +9,9 @@ const config = require('./config');
 export class AuthMiddleware implements NestMiddleware {
   resolve(...args: any[]): ExpressMiddleware {
     return (req, res, next) => {
+      console.log(req.headers.authorization);
       if (req.path !== '/auth/login') {
-        const token = req.headers['x-access-token'];
+        const token = req.headers.authorization;
         if (!token) {
           return res.status(401).send({ auth: false, message: 'No token provided' });
         }

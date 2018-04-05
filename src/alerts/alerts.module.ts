@@ -5,9 +5,10 @@ import { AlertsProviders } from '../database/alerts.providers';
 import { DatabaseModule } from '../database/database.module';
 import { MailgunService } from './mailgun.service';
 import { SlackService } from 'alerts/slack.service';
+import { UsersModule } from '../users/users.module';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, UsersModule],
   controllers: [AlertsController],
   components: [
     AlertsService,
