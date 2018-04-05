@@ -9,9 +9,10 @@ const config = require('./config');
 export class AuthMiddleware implements NestMiddleware {
   resolve(...args: any[]): ExpressMiddleware {
     return (req, res, next) => {
+      if (req.path !== '/auth/login') {
         const token = req.headers['x-access-token'];
         if (!token) {
-          return res.status(401).send({ auth: false, message: 'No token provided'});
+          return res.status(401).send({ auth: false, message: 'No token provided' });
         }
         jwt.verify(token, config.secret, (err, decoded) => {
           if (err) {
@@ -20,6 +21,9 @@ export class AuthMiddleware implements NestMiddleware {
             next();
           }
         });
-      };
-    }
+      } else {
+        next();
+      }
+    };
+  }
 }

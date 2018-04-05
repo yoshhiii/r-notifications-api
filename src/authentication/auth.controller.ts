@@ -60,6 +60,7 @@ export class AuthController {
 
   @Post('login')
   public async login(@Req() req, @Res() res) {
+    console.log(req);
     this.userService.findByEmail(req.body.email).then(user => {
       if (user) {
         const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
