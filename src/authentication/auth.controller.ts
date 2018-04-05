@@ -36,7 +36,7 @@ export class AuthController {
 
   @Get('me')
   public async getMe(@Req() req, @Res() res) {
-    const token = req.headers['x-access-token'];
+    const token = req.headers.Authorization;
     if (!token) {
       return res.status(401).send({ auth: false, message: 'No token provided'});
     }
