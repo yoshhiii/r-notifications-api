@@ -9,7 +9,8 @@ export class CoorsMiddleware implements NestMiddleware {
         res.header('Access-Control-Allow-Headers', 'content-type, authorization');
         res.header('Access-Control-Allow-Methods', 'POST, PUT, GET, OPTIONS');
         if (req.method === 'OPTIONS') {
-          res.send(200);
+          res.sendStatus(200);
+          // next();
         }
         else {
           next();
