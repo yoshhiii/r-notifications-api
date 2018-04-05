@@ -15,8 +15,8 @@ export class MailgunService {
     const data = {
       from: 'test@test.com',
       to: 'cwalsh@relias.com',
-      subject: 'Hello',
-      text: 'test message',
+      subject: alertDto.title,
+      text: alertDto.body,
     };
 
     mailgun.messages().send(data, async (error, body) => {
