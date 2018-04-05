@@ -10,13 +10,8 @@ export class UsersController {
   ) {}
 
   @Get()
-  async findAll(): Promise<User[]> {
-    return this.usersService.findAll();
-  }
-
-  @Get('email')
-  async findByEmail(@Query('email') email): Promise<User> {
-    return this.usersService.findByEmail(email);
+  async findAll(@Query() query): Promise<User[]> {
+    return this.usersService.findAll(query);
   }
 
   @Post()

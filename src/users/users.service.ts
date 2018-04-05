@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { Component, Inject, Param, HttpStatus } from '@nestjs/common';
+import { Component, Inject, Query, HttpStatus } from '@nestjs/common';
 import { User } from '../interfaces/user.interface';
 import { UserDto } from '../dto/user.dto';
 import { HttpException } from '@nestjs/core';
@@ -47,8 +47,16 @@ export class UsersService {
     }
   }
 
-  async findAll(): Promise<User[]> {
-    return await this.userModel.find().exec();
+  async findAll(query): Promise<User[]> {
+    if (query.departments != null) {
+      const departmentArray: Array<string> = query.departments.split(',');
+      const departmentQuery = [];
+
+      departmentArray.forEach(d => departmentQuery.push({ departments: d }));
+      query = { $or: departmentQuery };
+    }
+
+    return await this.userModel.find(query).exec();
   }
 
   async findByEmail(email: string): Promise<User> {
