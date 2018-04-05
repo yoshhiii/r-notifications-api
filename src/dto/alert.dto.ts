@@ -5,5 +5,6 @@ export class AlertDto {
     public body: string,
     public recipients: Array<string>,
     public createdDate: Date,
+    public type: string,
   ) {}
 }

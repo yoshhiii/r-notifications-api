@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Post, HttpStatus, HttpCode, Get, Headers, Body, Req, Res } from '@nestjs/common';
 import { AlertsService } from './alerts.service';
 import { Alert } from 'interfaces/alert.interface';
 import { AlertDto } from 'dto/alert.dto';
@@ -17,5 +17,11 @@ export class AlertsController {
   @Post()
   create(@Body() alertDto: AlertDto): Promise<Alert> {
     return this.alertsService.create(alertDto);
+  }
+
+  @Post()
+  send(@Req() req, @Res() res): Promise<any> {
+    console.log(req);
+    return this.alertsService.send(req);
   }
 }
