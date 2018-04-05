@@ -5,5 +5,6 @@ export class UserDto {
     public password: string,
     public departments: Array<string>,
     public notificationPref: string,
+    public slackUser: string,
   ) {}
 }
