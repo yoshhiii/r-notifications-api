@@ -1,7 +1,7 @@
 import { Controller, Post, HttpStatus, HttpCode, Get, Headers, Body, Req, Res } from '@nestjs/common';
 import { AlertsService } from './alerts.service';
-import { Alert } from 'interfaces/alert.interface';
-import { AlertDto } from 'dto/alert.dto';
+import { Alert } from '../interfaces/alert.interface';
+import { AlertDto } from '../dto/alert.dto';
 
 @Controller('alerts')
 export class AlertsController {
