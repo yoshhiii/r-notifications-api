@@ -7,16 +7,14 @@ const Slack = require('slack-node');
 @Component()
 export class SlackService {
     slack = new Slack();
-    webhookUri = 'https://hooks.slack.com/services/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';
+    webhookUri = 'https://hooks.slack.com/services/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';
 
     constructor(@Inject('AlertModelToken') private readonly alertModel: Model<Alert>) {
         this.slack.setWebhook(this.webhookUri);
     }
 
     async send(alertDto: AlertDto): Promise<any> {
-        console.log(alertDto);
         return await this.slack.webhook({
-            channel: '#ranchdressing2',
             username: 'relias-notifications',
 text: 'Subject: ' + alertDto.title + `
 Message: ` + alertDto.body,
