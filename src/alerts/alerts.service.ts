@@ -27,8 +27,8 @@ export class AlertsService {
     return await createdAlert.save();
   }
 
-  async findAll(): Promise<Alert[]> {
-    return await this.alertModel.find().exec();
+  async findAll(query): Promise<Alert[]> {
+    return await this.alertModel.find(query).exec();
   }
 
   async send(alertDto: AlertDto): Promise<any> {
@@ -50,14 +50,12 @@ export class AlertsService {
   }
 
   async delete(query): Promise<boolean> {
-    const alertId: string = query.id;
-    console.log('id: ' + alertId);
+    const alertId: string = query._id;
 
     let foundAlert: Alert;
     await this.alertModel.findOne()
       .where('_id').equals(alertId).exec()
       .then(alert => {
-        console.log(alert);
         foundAlert = alert;
     });
 

@@ -10,8 +10,8 @@ export class AlertsController {
   ) {}
 
   @Get()
-  findAll(): Promise<Alert[]> {
-    return this.alertsService.findAll();
+  findAll(@Query() query): Promise<Alert[]> {
+    return this.alertsService.findAll(query);
   }
 
   @Post()
