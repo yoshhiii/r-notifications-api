@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Body, Query, Req, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Query, Req, HttpCode } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from '../interfaces/user.interface';
 import { UserDto } from '../dto/user.dto';
@@ -22,5 +22,10 @@ export class UsersController {
   @Put()
   async update(@Body() userDto: UserDto) {
     return this.usersService.update(userDto);
+  }
+
+  @Delete()
+  async delete(@Query() query): Promise<boolean> {
+    return this.usersService.delete(query);
   }
 }

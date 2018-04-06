@@ -1,4 +1,4 @@
-import { Controller, Post, HttpStatus, HttpCode, Get, Headers, Body, Req, Res } from '@nestjs/common';
+import { Controller, Post, Delete, HttpStatus, HttpCode, Get, Headers, Body, Req, Res, Query } from '@nestjs/common';
 import { AlertsService } from './alerts.service';
 import { Alert } from '../interfaces/alert.interface';
 import { AlertDto } from '../dto/alert.dto';
@@ -22,5 +22,10 @@ export class AlertsController {
   @Post('send')
   send(@Body() alertDto: AlertDto): Promise<any> {
     return this.alertsService.send(alertDto);
+  }
+
+  @Delete()
+  async delete(@Query() query): Promise<boolean> {
+    return this.alertsService.delete(query);
   }
 }

@@ -48,4 +48,24 @@ export class AlertsService {
     });
     return null;
   }
+
+  async delete(query): Promise<boolean> {
+    const alertId: string = query.id;
+    console.log('id: ' + alertId);
+
+    let foundAlert: Alert;
+    await this.alertModel.findOne()
+      .where('_id').equals(alertId).exec()
+      .then(alert => {
+        console.log(alert);
+        foundAlert = alert;
+    });
+
+    if (foundAlert == null) {
+      throw new HttpException('Alert not found', HttpStatus.BAD_REQUEST);
+    }
+
+    await this.alertModel.deleteOne({ _id: alertId });
+    return true;
+  }
 }

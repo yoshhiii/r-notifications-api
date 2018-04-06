@@ -77,4 +77,18 @@ export class UsersService {
       .where('departments').equals(dept[0])
       .exec();
   }
+
+  async delete(query): Promise<boolean> {
+    const userEmail = query.email;
+
+    let user: User;
+    this.findByEmail(userEmail).then(foundUser => user = foundUser);
+
+    if (user == null) {
+      throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
+    }
+
+    await this.userModel.deleteOne({ email: userEmail });
+    return true;
+  }
 }
