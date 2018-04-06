@@ -7,7 +7,7 @@ const Slack = require('slack-node');
 @Component()
 export class SlackService {
     slack = new Slack();
-    webhookUri = 'https://hooks.slack.com/services/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';
+    webhookUri = 'https://hooks.slack.com/services/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';
 
     constructor(@Inject('AlertModelToken') private readonly alertModel: Model<Alert>) {
         this.slack.setWebhook(this.webhookUri);
